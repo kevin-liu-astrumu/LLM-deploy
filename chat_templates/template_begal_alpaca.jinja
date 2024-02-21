@@ -1,0 +1,15 @@
+Below is an instruction that describes a task.  Write a response that appropriately completes the request.
+
+### Instruction:
+{% for message in messages %}
+{% if message.role == 'system' %}
+{{ message.content }}
+{% endif %}
+{% endfor %}
+{% for message in messages %}
+{% if message.role == 'user' %}
+{{ message.content }}
+{% endif %}
+{% endfor %}
+
+### Response:

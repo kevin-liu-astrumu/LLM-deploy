@@ -1,0 +1,21 @@
+{% if messages[0]['role'] == 'system' %}
+    {% set loop_messages = messages[1:] %}
+    {% set system_message = '<start_of_turn>user ' + messages[0]['content'].strip() + '\n\n' %}
+{% else %}
+    {% set loop_messages = messages %}
+    {% set system_message = '' %}
+{% endif %}
+{{ bos_token }}
+{% for message in loop_messages %}
+    {% if loop.index0 == 0 %}
+        {% set content = system_message + message['content'] %}
+    {% else %}
+        {% set content = message['content'] %}
+    {% endif %}
+    {% if message['role'] == 'user' %}
+        {{  content.strip() + '<end_of_turn>
+<start_of_turn>model' }}
+    {% elif message['role'] == 'assistant' %}
+        {{ ' '  + content.strip() + ' ' + eos_token }}
+    {% endif %}
+{% endfor %}
