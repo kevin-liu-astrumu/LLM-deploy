@@ -16,7 +16,7 @@ class Custom_LLM(CustomLLM):
     base_url: str = Field(
         description="Base url the model is hosted under.",
     )
-    model: str = Field(description="The Ollama model to use.")
+    model: str = Field(description="Model used for generation.")
     system_prompt: str = Field(
         default="You are a helpful AI assistant. Your task is to help user with their requests.",
         description="The system prompt used for LLM generation.",
